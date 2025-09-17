@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="LOG_PATH" value="/applog/wasapp/apay" />
+    <property name="LOG_NAME" value="apay" />
+    <springProperty scope="context" name="LOG_PROFILE" source="instance" />
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${LOG_NAME}-${LOG_PROFILE}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${LOG_PATH}/${LOG_NAME}-${LOG_PROFILE}_%d{yyyyMMdd}.log
+            </fileNamePattern>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <Pattern>
+                %d{yyyyMMdd HH:mm:ss.SSS} %-5level %logger{36}.%M - %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyyMMdd HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level)
+                %logger{36}.%M - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="TEST_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyyMMdd HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <!-- LOG LEVEL FATAL ERROR WARN INFO DEBUG TRACE -->
+        <root level="DEBUG">
+            <appender-ref ref="TEST_CONSOLE" />
+        </root>
+
+
+
+</configuration>
