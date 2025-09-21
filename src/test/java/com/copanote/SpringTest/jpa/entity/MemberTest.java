@@ -17,7 +17,6 @@ public class MemberTest {
     @PersistenceContext
     EntityManager em;
 
-
     @Test
     @Transactional
     public void testEntity() {

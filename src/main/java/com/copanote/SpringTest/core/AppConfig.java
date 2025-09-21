@@ -17,18 +17,18 @@ public class AppConfig {
 
     @Bean
     public MemberService memberService() {
-        return new MemberServiceImpl(memberRepository());
+        return new MemberServiceImpl(memoryMemberRepository());
     }
 
     @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(
-                memberRepository(),
+                memoryMemberRepository(),
                 discountPolicy());
     }
 
     @Bean
-    public MemberRepository memberRepository() {
+    public MemberRepository memoryMemberRepository() {
         return new MemoryMemberRepository();
     }
 
